@@ -5,6 +5,7 @@
 
 #include <rclcpp/rclcpp.hpp>
 
+
 namespace realsense2_camera
 {
     class ParametersBackend
@@ -15,7 +16,13 @@ namespace realsense2_camera
                 _logger(node.get_logger())
                 {};
             ~ParametersBackend();
-            void add_on_set_parameters_callback(rclcpp::node_interfaces::NodeParametersInterface::OnParametersSetCallbackType callback);
+
+            #if defined( RCLCPP_HAS_OnSetParametersCallbackType )
+                using ros2_param_callback_type = rclcpp::node_interfaces::NodeParametersInterface::OnSetParametersCallbackType;
+            #else
+                using ros2_param_callback_type = rclcpp::node_interfaces::NodeParametersInterface::OnParametersSetCallbackType;
+            #endif
+            void add_on_set_parameters_callback(ros2_param_callback_type callback);
 
 
         private:

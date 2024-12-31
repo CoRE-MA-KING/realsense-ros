@@ -5,7 +5,7 @@
 
 namespace realsense2_camera
 {
-    void ParametersBackend::add_on_set_parameters_callback(rclcpp::node_interfaces::NodeParametersInterface::OnParametersSetCallbackType callback)
+    void ParametersBackend::add_on_set_parameters_callback(ros2_param_callback_type callback)
     {
         _ros_callback = _node.add_on_set_parameters_callback(callback);
     }
